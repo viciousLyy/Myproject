@@ -7,7 +7,6 @@ import java.io.File;
 
 public abstract class CompileBuilder implements Builder{
 
-
     public File compile(Project project){
         return null;
     }

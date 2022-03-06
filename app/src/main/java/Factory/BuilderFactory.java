@@ -15,10 +15,11 @@ public class BuilderFactory {
         /*
         如果factory为空，则表明还不曾创建factory对象，将会创建新的实例
          */
-        if(factory == null){
-            factory = new BuilderFactory();
+        synchronized (BuilderFactory.class){    //加锁解决多线程访问不同步问题
+            if(factory == null){
+                factory = new BuilderFactory();
+            }
         }
-
         return factory;
     }
 
