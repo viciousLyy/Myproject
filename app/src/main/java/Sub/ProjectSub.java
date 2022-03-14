@@ -19,9 +19,7 @@ public class ProjectSub extends Project {
         this.srcExt = srcExt;
     }
 
-    /*
-    获得所有的文件
-     */
+
     public List<File> getMainFiles(String path){
         File[] files = new File(path).listFiles();
         for(File file:files){

@@ -3,12 +3,37 @@
  */
 package Myproject;
 
+import java.io.*;
+import java.util.List;
+
 public class App {
+
+
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        File file = new File("E:\\Myproject");
+        String rolePath = "";
+        String projectName = "";
+        try {
+            rolePath = file.getCanonicalPath();
+            projectName = rolePath.substring(rolePath.lastIndexOf("\\")+1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(projectName);
+    }
+
+    public static void findFiles(List<File> result, File targetPath, List<String> singletonList) {
+        if(targetPath.isDirectory()){
+            File[] fs = targetPath.listFiles();
+            for(int i=0;i<fs.length;i++){
+                findFiles(result,new File(fs[i].getPath()),singletonList);
+            }
+        }else if(targetPath.getName().endsWith("."+singletonList.get(0))){
+            result.add(targetPath);
+        }
     }
 }

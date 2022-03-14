@@ -1,13 +1,9 @@
-package Builder;
+package guet.depart3.yongyu.Builder;
 
 import Utils.Project;
 import Utils.TextFile;
 
-public abstract class MixedBuilder implements Builder{
-
-    public void  compile(){
-
-    }
+public  class InterpreteBuilder implements Builder{
 
     @Override
     public void run(Project project) {

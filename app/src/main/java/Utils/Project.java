@@ -1,10 +1,11 @@
 package Utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project {
+public abstract class Project {
     static String path;
     static String srcExt;
 
@@ -21,7 +22,14 @@ public class Project {
     获得所有的文件
      */
     public List<File> getMainFiles(String path){
-        return null;
+        File[] files = new File(path).listFiles();
+        for(File file:files){
+            if(file.isDirectory())
+                getMainFiles(file.getAbsolutePath());
+            else
+                allFiles.add(file);
+        }
+        return allFiles;
     }
 
     /*
@@ -29,5 +37,26 @@ public class Project {
      */
     public void setMainFileIndex(int index){
 
+    }
+
+    public File getOutputDir(){
+        return null;
+    }
+
+    public List<File> getSrcFiles(){
+        return null;
+    }
+
+    public String getProjectName() {
+        File file = new File(path);
+        String rolePath = "";
+        String projectName = "";
+        try {
+            rolePath = file.getCanonicalPath();
+            projectName = rolePath.substring(rolePath.lastIndexOf("\\") + 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return projectName;
     }
 }

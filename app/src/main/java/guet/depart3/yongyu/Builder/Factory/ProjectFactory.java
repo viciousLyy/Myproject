@@ -1,4 +1,4 @@
-package Factory;
+package guet.depart3.yongyu.Builder.Factory;
 
 import Utils.Project;
 
@@ -8,11 +8,13 @@ public class ProjectFactory {
 
     private ProjectFactory(){}
 
-    public static ProjectFactory getInstance(){
-        if(factory == null){
-            factory = new ProjectFactory();
+    public static ProjectFactory getInstance() {
+        synchronized (ProjectFactory.class) {
+            if (factory == null) {
+                factory = new ProjectFactory();
+            }
+            return factory;
         }
-        return factory;
     }
 
     public Project getProject(String path,String srcExt){
